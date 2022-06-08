@@ -1,0 +1,46 @@
+from abc import ABC
+
+class Abs(ABC):
+    def _init_(this, adr):
+        this.address = adr
+    def calcFreqs(self):
+        pass
+
+class ListCount(Abs):
+    def _init_(this, adr):
+        super()._init_(adr)
+
+    def calcFreqs(this):
+        file = open(this.address, "r")
+        content = []
+        for line in file:
+            for word in line.split():
+                content.append(word)
+                content2=[]
+                content3=[]
+                for word in content:
+                    if word in content2:
+                        continue
+                    else:
+                        content3.append(str(word)+" = "+str(content.count(word)))
+                        content2.append(word)
+                        print(content3)
+
+class DictionaryCount(Abs):
+    def _init_(this,adr):
+        super()._init_(adr)
+
+    def calcFreqs(this):
+        file = open(this.address, "r")
+        content={}
+        for line in file:
+            for word in line.split():
+                content[word] = content.get(word, 0)+1
+                print(content)
+
+y = ListCount("strange.txt")
+y.calcFreqs()
+
+
+x = DictionaryCount("strange.txt")
+x.calcFreqs()
